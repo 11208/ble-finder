@@ -16,7 +16,7 @@ db.all(sql, [], (err, rows) => {
   }
   rows.forEach((row) => {
     if(row.name != null){
-        console.log(row.classic, row.name);
+        console.log(row);
     }
   });
 });
