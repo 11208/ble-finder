@@ -1,8 +1,24 @@
-const lineReader = require('line-reader');
+var spawn = require('child_process').spawn
+const lineReader = require('line-reader')
 
 lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
-    var line = lines.split(/(\s+)/).filter( function(e) { return e.trim().length > 0; } );
+    var line = lines.split(/(\s+)/).filter( function(e) { return e.trim().length > 0; } )
     if(line[1] == 'CL'){
-        console.log(line[2])
+        var hciToolScan = spawn('hcitool', ['name', line[2]])
+        hciToolScan.stdout.on('data', function(data) {
+            if ( data.length ) {
+              data = data.toString('ascii')
+              var result;
+              var re = /((?:[0-9A-F]{2}(?::|)){6})[\t\s]+([^\n\r]+)/gmi
+              while( (result = re.exec(data)) ) {
+                // result[1] MAC 
+                // result[2] NAME
+                console.log('Found device: ' + result[2])
+              }
+            }
+          });
+          hciToolScan.on("exit", function(code) {
+            console.log('done',"hcitool scan: exited (code " + code + ")")
+        })
     }
-});
+})
