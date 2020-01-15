@@ -24,13 +24,12 @@ lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
         var MAC = line[2]
         if(!checkList.includes(MAC)){
             console.log('checking:'+ MAC)
-            var cmd = "hcitool name "+MAC
-            run(cmd)
+            run('hcitool', ['name', MAC])
             .then((response) => {
                 console.log('response:'+ response)
             })
             .catch((error) => {
-                console.log('error:'+ error)
+                console.log(error)
             })
             checkList.push(MAC)
         }
