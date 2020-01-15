@@ -1,16 +1,20 @@
 var spawn = require('child_process').spawn
 const lineReader = require('line-reader')
 
-function run(cmd, callback) {
-    var spawn = require('child_process').spawn;
-    var command = spawn(cmd);
-    var result = '';
-    command.stdout.on('data', function(data) {
-         result += data.toString();
-    });
-    command.on('close', function(code) {
-        return callback(result);
-    });
+function run(cmd) {
+    return new Promise((resolve, reject) => {
+        var command = spawn(cmd)
+        var result = ''
+        command.stdout.on('data', function(data) {
+             result += data.toString()
+        })
+        command.on('close', function(code) {
+            resolve(result)
+        })
+        command.on('error', function(err) { 
+            reject(err) 
+        })
+    })
 }
 
 var checkList = []
