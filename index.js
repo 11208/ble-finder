@@ -8,12 +8,13 @@ lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
         var MAC = line[2]
         if(!checkList.includes(MAC)){
             console.log('checking:'+ MAC)
+            var result = '';
             var hciToolScan = spawn('hcitool', ['name', MAC])
             hciToolScan.stdout.on('data', function(data) {
-                console.log('Found device: ' + data)
+                result += data.toString();
             });
-            hciToolScan.on("exit", function(code) {
-                // console.log('done',"hcitool scan: exited (code " + code + ")")
+            hciToolScan.on("close", function(code) {
+                console.log('Device name: '+ result)
             })
             checkList.push(MAC)
         }
