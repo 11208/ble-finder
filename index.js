@@ -18,7 +18,7 @@ lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
             }
           });
           hciToolScan.on("exit", function(code) {
-            console.log('done',"hcitool scan: exited (code " + code + ")")
+            // console.log('done',"hcitool scan: exited (code " + code + ")")
         })
     }
 })
