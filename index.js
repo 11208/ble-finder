@@ -1,22 +1,5 @@
 var spawn = require('child_process').spawn
-const { exec } = require("child_process");
 const lineReader = require('line-reader')
-
-function hciToolScan(mac) {
-    return new Promise((resolve, reject) => {
-        var command = spawn('hcitool', ['name ', mac])
-        var result = mac+' NAME:'
-        command.stdout.on('data', (data) => {
-             result += data.toString()
-        })
-        command.on('close', (code) => {
-            resolve(result)
-        })
-        command.on('error', (err) => { 
-            reject(err) 
-        })
-    })
-}
 
 var checkList = []
 lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
@@ -24,14 +7,15 @@ lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
     if(line[1] == 'CL'){
         var MAC = line[2]
         if(!checkList.includes(MAC)){
-            hciToolScan(MAC)
-            .then((response) => {
-                console.log('MAC:'+ response)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
             checkList.push(MAC)
+            var hciToolScan = spawn('hcitool', ['name', MAC])
+            var result = 'MAC:'+mac+' NAME:'
+            hciToolScan.stdout.on('data', function(data) {
+                result += data.toString()
+            });
+            hciToolScan.on("close", function(code) {
+                console.log(result)
+            })
         }
     }
 })
