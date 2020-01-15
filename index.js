@@ -1,5 +1,4 @@
 var spawn = require('child_process').spawn
-const { exec } = require("child_process");
 const lineReader = require('line-reader')
 
 function hciToolScan(mac) {
