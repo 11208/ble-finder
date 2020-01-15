@@ -1,3 +1,4 @@
+import os
 import tailer
 from subprocess import PIPE, run
  
@@ -9,9 +10,10 @@ from subprocess import PIPE, run
         # result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
         # print(result.returncode, result.stdout, result.stderr)
 
-
+filename = "/home/pi/blue_hydra/blue_hydra_rssi.log"
 checkList = []
-with open("/home/pi/blue_hydra/blue_hydra_rssi.log") as fp:
+print(os.stat(filename).st_mtime)
+with open(filename) as fp:
     for lines in fp:
         line = lines.split()
         if(line[1] == 'CL'):
