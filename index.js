@@ -26,7 +26,6 @@ function readLine() {
                 checkList.push(MAC)
                 hciToolScan(MAC)
                 .then((responses) => {
-                    console.log('Status:'+ responses)
                     var response = responses.split(/(\s+)/).filter( function(e) { return e.trim().length > 0; } )
                     checkList.filter(item => item !== response[0])
                 })
@@ -35,9 +34,6 @@ function readLine() {
                 })
             }
         }
-    }).then(function (err) {
-        if (err) throw err;
-        readLine()
     })
 }
 readLine()
