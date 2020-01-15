@@ -3,9 +3,10 @@ const lineReader = require('line-reader')
 
 lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
     var line = lines.split(/(\s+)/).filter( function(e) { return e.trim().length > 0; } )
-    console.log(line[1])
     if(line[1] == 'CL'){
-        var hciToolScan = spawn('hcitool', ['name', line[2]])
+        var MAC = line[2]
+        console.log('checking:'+ MAC)
+        var hciToolScan = spawn('hcitool', ['name', MAC])
         hciToolScan.stdout.on('data', function(data) {
             console.log('Found device: ' + data)
           });
