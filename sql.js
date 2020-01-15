@@ -15,7 +15,7 @@ db.all(sql, [], (err, rows) => {
     throw err;
   }
   rows.forEach((row) => {
-    if(row.name != null){
+    if(row.name != null && row.classic == 't'){
         console.log(row);
     }
   });
