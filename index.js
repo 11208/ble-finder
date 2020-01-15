@@ -5,7 +5,7 @@ const lineReader = require('line-reader')
 function hciToolScan(mac) {
     return new Promise((resolve, reject) => {
         var command = spawn('hcitool', ['name ', mac])
-        var result = ''
+        var result = mac+': '
         command.stdout.on('data', (data) => {
              result += data.toString()
         })
@@ -27,7 +27,7 @@ lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
             console.log('checking:'+ MAC)
             hciToolScan(MAC)
             .then((response) => {
-                console.log('response:'+ response)
+                console.log('Device :'+ response)
             })
             .catch((error) => {
                 console.log(error)
