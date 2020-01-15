@@ -24,6 +24,7 @@ lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
     if(line[1] == 'CL'){
         var MAC = line[2]
         if(!checkList.includes(MAC)){
+            checkList.push(MAC)
             hciToolScan(MAC)
             .then((responses) => {
                 console.log('Status:'+ responses)
@@ -33,7 +34,6 @@ lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
             .catch((error) => {
                 console.log(error)
             })
-            checkList.push(MAC)
         }
     }
 })
