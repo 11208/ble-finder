@@ -9,7 +9,7 @@ lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
         if(!checkList.includes(MAC)){
             checkList.push(MAC)
             var hciToolScan = spawn('hcitool', ['name', MAC])
-            var result = 'MAC:'+mac+' NAME:'
+            var result = 'MAC:'+MAC+' NAME:'
             hciToolScan.stdout.on('data', function(data) {
                 result += data.toString()
             });
