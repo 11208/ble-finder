@@ -10,8 +10,12 @@ from subprocess import PIPE, run
         # print(result.returncode, result.stdout, result.stderr)
 
 
+checkList = []
 with open("/home/pi/blue_hydra/blue_hydra_rssi.log") as fp:
     for lines in fp:
         line = lines.split()
         if(line[1] == 'CL'):
-            print(line[2])
+            mac = line[2]
+            if mac not in checkList:
+                checkList.append(mac)
+                print(mac)
