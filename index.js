@@ -1,9 +1,9 @@
 var spawn = require('child_process').spawn
 const lineReader = require('line-reader')
 
-function run(cmd) {
+function run(mac) {
     return new Promise((resolve, reject) => {
-        var command = spawn(cmd)
+        var command = spawn('hcitool', ['name ', mac])
         var result = ''
         command.stdout.on('data', function(data) {
              result += data.toString()
@@ -24,7 +24,7 @@ lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
         var MAC = line[2]
         if(!checkList.includes(MAC)){
             console.log('checking:'+ MAC)
-            run('hcitool', ['name ', MAC])
+            run(MAC)
             .then((response) => {
                 console.log('response:'+ response)
             })
