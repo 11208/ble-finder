@@ -12,12 +12,12 @@ from subprocess import PIPE, run
 
 filename = "/home/pi/blue_hydra/blue_hydra_rssi.log"
 checkList = []
-print(os.stat(filename).st_mtime)
-with open(filename) as fp:
-    for lines in fp:
-        line = lines.split()
-        if(line[1] == 'CL'):
-            mac = line[2]
-            if mac not in checkList:
-                checkList.append(mac)
-                print(mac)
+while 1:
+    with open(filename) as fp:
+        for lines in fp:
+            line = lines.split()
+            if(line[1] == 'CL'):
+                mac = line[2]
+                if mac not in checkList:
+                    checkList.append(mac)
+                    print(mac)
