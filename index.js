@@ -24,7 +24,6 @@ lineReader.eachLine('/home/pi/blue_hydra/blue_hydra_rssi.log', function(lines) {
     if(line[1] == 'CL'){
         var MAC = line[2]
         if(!checkList.includes(MAC)){
-            console.log('checking:'+ MAC)
             hciToolScan(MAC)
             .then((response) => {
                 console.log('MAC:'+ response)
