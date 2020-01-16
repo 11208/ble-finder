@@ -11,6 +11,7 @@ let sql = `SELECT address, name, vendor, company, manufacturer, classic_mode AS 
     BETWEEN ${START_TIME} AND ${STOP_TIME}`
 
 function fetchData(){
+  console.log('\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
   let db = new sqlite3.Database('/home/pi/blue_hydra/blue_hydra.db')
   db.all(sql, [], (err, rows) => {
     if (!err) {
@@ -25,6 +26,7 @@ function fetchData(){
     }
   })
   db.close()
+  console.log('\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
   setTimeout(fetchData, 5000);
 }
 fetchData()
