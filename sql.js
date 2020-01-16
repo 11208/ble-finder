@@ -19,8 +19,7 @@ let sql = `
         classic_minor_class, 
         classic_class,
     FROM blue_hydra_devices
-    WHERE CAST(strftime('%s',updated_at) AS integer) 
-    BETWEEN CAST((${START_TIME} AS integer) AND CAST(${STOP_TIME} AS integer)
+    WHERE strftime('%s',updated_at) BETWEEN ${START_TIME} AND ${STOP_TIME}
 `;
  
 db.all(sql, [], (err, rows) => {
