@@ -1,9 +1,9 @@
 const sqlite3 = require('sqlite3').verbose();
- 
-var MS_PER_MINUTE = 60000;
+var moment = require('moment');
+
 let db = new sqlite3.Database('/home/pi/blue_hydra/blue_hydra.db')
-let START_TIME = (date+"%s") - MS_PER_MINUTE
-let STOP_TIME = date +"%s"
+let START_TIME = moment().subtract(1, "minutes").unix();
+let STOP_TIME = moment().unix();
 let sql = `
     SELECT 
         address, 
