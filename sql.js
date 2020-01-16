@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 var moment = require('moment');
 
 let db = new sqlite3.Database('/home/pi/blue_hydra/blue_hydra.db')
-let CURRENT_TIME = moment().add(7, "hour")
+let CURRENT_TIME = moment()
 let STOP_TIME = CURRENT_TIME.format('YYYY-MM-DD h:mm:ss')
 let START_TIME = CURRENT_TIME.subtract(1, "hour").format('YYYY-MM-DD h:mm:ss')
 let sql = `SELECT address, name, vendor, company, manufacturer, classic_mode AS classic, le_mode AS le, le_address_type, updated_at, classic_major_class, classic_minor_class, classic_class
