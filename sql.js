@@ -19,7 +19,7 @@ function fetchData(){
     if (!err) {
       rows.forEach((row) => {
         if(row.name != null && row.classic == 't'){
-          console.log(row.name)
+          console.log(row)
         }
       })
     }
