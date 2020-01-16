@@ -17,7 +17,7 @@ db.all(sql2, [], (err, rows) => {
   }
   rows.forEach((row) => {
     if(row.name != null && row.classic == 't'){
-        console.log(row.name);
+        console.log(row.name, row.updated_at);
     }
   });
 });
