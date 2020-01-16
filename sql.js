@@ -24,7 +24,6 @@ function fetchData(){
       console.log(err)
     }
   })
-  db.close()
   setTimeout(fetchData, 5000);
 }
 fetchData()
