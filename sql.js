@@ -19,7 +19,7 @@ function fetchData(){
     if (!err) {
       rows.forEach((row) => {
         if(row.name != null && row.classic == 't'){
-          console.log(row.name, row.updated_at)
+          console.log(row.name)
         }
       })
     }
@@ -32,6 +32,6 @@ function fetchData(){
       return console.error(err.message)
     }
   })
-  setTimeout(fetchData, 5000);
+  // setTimeout(fetchData, 5000);
 }
 fetchData()
