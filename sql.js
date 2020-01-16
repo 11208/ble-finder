@@ -6,8 +6,7 @@ let START_TIME = moment().subtract(1, "minutes").format('YYYY-MM-DD h:mm:ss')
 let STOP_TIME = moment().format('YYYY-MM-DD h:mm:ss')
 let sql = `
     SELECT 
-        address, 
-        name, 
+        address, name, 
         vendor, 
         company, 
         manufacturer, 
@@ -17,7 +16,7 @@ let sql = `
         updated_at as last_seen, 
         classic_major_class, 
         classic_minor_class, 
-        classic_class,
+        classic_class
     FROM blue_hydra_devices
     WHERE last_seen BETWEEN ${START_TIME} AND ${STOP_TIME}
 `;
