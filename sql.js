@@ -27,12 +27,6 @@ function fetchData(){
       console.log(err)
     }
   })
-  db.run(`DELETE FROM blue_hydra_devices`, function(err) {
-    if (err) {
-      return console.error(err.message);
-    }
-    console.log(`Row(s) deleted ${this.changes}`);
-  })
   db.close((err) => {
     if (err) {
       return console.error(err.message)
