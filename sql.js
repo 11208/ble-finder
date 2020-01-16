@@ -9,7 +9,12 @@ let sql = `SELECT address, name, vendor, company, manufacturer, classic_mode AS 
 
 function fetchData(){
   console.log('\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
-  let db = new sqlite3.Database('/home/pi/blue_hydra/blue_hydra.db')
+  let db = new sqlite3.Database('/home/pi/blue_hydra/blue_hydra.db', (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+  });
+
   db.all(sql, [], (err, rows) => {
     if (!err) {
       rows.forEach((row) => {
@@ -22,7 +27,17 @@ function fetchData(){
       console.log(err)
     }
   })
-  db.close()
+  db.run(`DELETE FROM blue_hydra_devices`, function(err) {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log(`Row(s) deleted ${this.changes}`);
+  })
+  db.close((err) => {
+    if (err) {
+      return console.error(err.message)
+    }
+  })
   setTimeout(fetchData, 5000);
 }
 fetchData()
