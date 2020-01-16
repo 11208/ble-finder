@@ -2,8 +2,8 @@ const sqlite3 = require('sqlite3').verbose();
 var moment = require('moment');
 
 let db = new sqlite3.Database('/home/pi/blue_hydra/blue_hydra.db')
-let START_TIME = moment().subtract(1, "minutes").unix();
-let STOP_TIME = moment().unix();
+let START_TIME = moment().subtract(1, "minutes")
+let STOP_TIME = moment()
 let sql = `
     SELECT 
         address, 
@@ -19,7 +19,7 @@ let sql = `
         classic_minor_class, 
         classic_class,
     FROM blue_hydra_devices
-    WHERE strftime('%s',updated_at) BETWEEN ${START_TIME} AND ${STOP_TIME}
+    WHERE updated_at BETWEEN ${START_TIME} AND ${STOP_TIME}
 `;
  
 db.all(sql, [], (err, rows) => {
