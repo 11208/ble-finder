@@ -19,7 +19,7 @@ let sql = `
         classic_minor_class, 
         classic_class,
     FROM blue_hydra_devices
-    WHERE updated_at BETWEEN ${START_TIME} AND ${STOP_TIME}
+    WHERE last_seen BETWEEN ${START_TIME} AND ${STOP_TIME}
 `;
  
 db.all(sql, [], (err, rows) => {
