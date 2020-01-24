@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hackerwarehouse/ble_finder#readme",
   "dependencies": {
+    "always-tail": "^0.2.0",
     "line-reader": "^0.4.0",
     "moment": "^2.24.0",
     "sqlite3": "^4.1.1"
