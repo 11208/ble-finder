@@ -1,5 +1,7 @@
 const sqlite3 = require('sqlite3').verbose()
 var moment = require('moment')
+var args = process.argv;
+
 let filename = '/home/pi/blue_hydra/blue_hydra.db'
 function fetchData(){
   console.log('\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\')
@@ -41,7 +43,6 @@ function clearData(){
     }
   });
    
-  let id = 1;
   db.run(`DELETE FROM blue_hydra_devices`, function(err) {
     if (err) {
       return console.error(err.message);
@@ -54,5 +55,15 @@ function clearData(){
     }
   })
 }
-fetchData()
-clearData()
+
+switch(args[2]){
+  case "select":
+    fetchData()
+    break
+  case "delete":
+    clearData()
+    break
+  default:
+    console.log("no cmd")
+    break
+}
