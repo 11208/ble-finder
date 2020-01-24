@@ -3,8 +3,11 @@ var fs = require('fs');
 var filename = "/home/pi/blue_hydra/blue_hydra_rssi.log";
  
 if (!fs.existsSync(filename)) fs.writeFileSync(filename, "");
- 
-var tail = new Tail(filename, '\n');
+var mb = 1024 * 1024
+var options = {
+    blockSize: 2*mb
+}
+var tail = new Tail(filename, '\n', options);
  
 tail.on('line', function(data) {
   console.log("got line:", data);
